@@ -41,7 +41,6 @@ function toReadable(number) {
       words += ones[onesDigit];
     }
   }
-
   return words;
 }
-console.log(toReadable());
+console.log(toReadable(number));
