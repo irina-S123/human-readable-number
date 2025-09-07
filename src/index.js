@@ -1,46 +1,31 @@
 function toReadable(number) {
   const ones = [
-    '', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'
+    '', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine',
+    'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen',
+    'seventeen', 'eighteen', 'nineteen'
   ];
-  const teens = [
-    'ten', 'eleven', 'twelve', 'thirteen', 'fourteen',
-    'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'
-  ];
+
   const tens = [
     '', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'
   ];
 
-  if (number === 0) {
-    return 'zero';
-  }
+  if (number === 0) return 'zero';
 
-  let words = '';
+  function helper(n) {
+    let result = '';
 
-  const hundredsDigit = Math.floor(number / 100);
-  const remainder = number % 100;
-
-  if (hundredsDigit > 0) {
-    words += ones[hundredsDigit] + ' hundred';
-    if (remainder > 0) {
-      words += ' ';
+    if (n < 20) {
+      result = ones[n];
+    } else if (n < 100) {
+      result = tens[Math.floor(n / 10)];
+      if (n % 10) result += ' ' + ones[n % 10];
+    } else if (n < 1000) {
+      result = ones[Math.floor(n / 100)] + ' hundred';
+      if (n % 100) result += ' ' + helper(n % 100);
     }
+    return result;
   }
 
-  if (remainder >= 10 && remainder < 20) {
-    words += teens[remainder - 10];
-  } else {
-    const tensDigit = Math.floor(remainder / 10);
-    const onesDigit = remainder % 10;
-
-    if (tensDigit > 1) {
-      words += tens[tensDigit];
-      if (onesDigit > 0) {
-        words += ' ' + ones[onesDigit];
-      }
-    } else if (onesDigit > 0) {
-      words += ones[onesDigit];
-    }
-  }
-  return words;
+  return helper(number);
 }
 console.log(toReadable(number));
