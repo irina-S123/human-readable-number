@@ -28,3 +28,4 @@ function toReadable(number) {
 
   return helper(number);
 }
+console.log(toReadable(1));        
