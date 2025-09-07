@@ -44,4 +44,4 @@ function toReadable(number) {
 
   return words;
 }
-console.log(toReadable(1));
+console.log(toReadable());
